@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: zuul-api-gateway                               #${API_GATEWAY_APPLICATION_NAME}       
+
+server:
+  contextPath: /zuul
+  port: 8765 #${API_GATEWAY_PORT_NUMBER}                 
+#eureka 
+eureka:
+  instance:
+    prefer-ip-address: true
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/        #${REGISTRY_SERVICE_DEFAULT_ZONE}     #http://localhost:8761/eureka/     
+      hostname: localhost                               #${REGISTRY_SERVICE_INSTANCE_HOSTNAME}
+
+zuul:
+  routes:
+    CLOUD-SERVICE: 
+      path: /cloud/**
+      serviceId: CLOUD-SERVICE
+  host:
+    connect-timeout-millis: 160000000
+    socket-timeout-millis: 160000000
+     
+CLOUD-SERVICE:
+  ribbon:
+    listOfServers: localhost:9004   #provide the service inst. address.
