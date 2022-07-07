@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: comm-scaffold-registry-service # ${REGISTRY_SERVICE_APPLICATION_NAME}
+
+server:
+  port: 8761 #${REGISTRY_SERVICE_PORT_NUMBER}               #8761
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    service-url:
+          defaultZone: http://localhost:8761/eureka/ #${REGISTRY_SERVICE_DEFAULT_ZONE}
+  server:
+      waitTimeInMsWhenSyncEmpty: 0
+  instance:
+    prefer-ip-address: true
